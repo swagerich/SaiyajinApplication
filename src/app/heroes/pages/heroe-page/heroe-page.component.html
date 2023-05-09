@@ -1,0 +1,35 @@
+<ng-template #divLoading>
+  <mat-grid-list cols="1">
+    <mat-grid-tile>
+      <mat-spinner></mat-spinner>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>
+
+<div *ngIf="heroe; else divLoading" class="grid p-2 animate__animated animate__fadeIn">
+  <mat-card class="col-12 sm:col-4">
+    <mat-card-header>
+      <mat-card-title>{{ heroe.alterEgo }}</mat-card-title>
+      <mat-card-subtitle>{{ heroe.superHero }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image [src]="profileImageUrl" />
+  </mat-card>
+  <mat-card class="col-12 sm:col-6">
+    <mat-card-header>
+      <mat-card-title>Informacion</mat-card-title>
+      <mat-card-subtitle>{{ heroe.superHero }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-list>
+        <mat-list-item>{{ heroe.firstAppearance }}</mat-list-item>
+        <mat-list-item>{{ heroe.characters }}</mat-list-item>
+        <mat-list-item>{{ heroe.publisher }}</mat-list-item>
+        <mat-list-item>{{ heroe.alterEgo }}</mat-list-item>
+      </mat-list>
+
+      <mat-card-actions>
+        <button color="warn" (click)="back()" mat-button>Regresar</button>
+      </mat-card-actions>
+    </mat-card-content>
+  </mat-card>
+</div>

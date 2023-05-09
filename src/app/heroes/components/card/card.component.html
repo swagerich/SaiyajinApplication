@@ -1,0 +1,54 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ heroe.superHero }}</mat-card-title>
+    <mat-card-subtitle>{{ heroe.alterEgo }}</mat-card-subtitle>
+  </mat-card-header>
+
+ <!--  <img mat-card-image [src]="'assets/heroes/' + heroe.id + '.jpg'" [alt]="heroe.superHero"> -->
+ <!--  <img mat-card-image [src]="'heroe | heroeImage" [alt]="heroe.superHero"> -->
+ <img mat-card-image *ngIf="profileImageUrl" [src]="profileImageUrl" style="width: 300px;">
+ <img mat-card-image *ngIf="!profileImageUrl" src="assets/no-image.png" style="width: 300px;">
+
+  <mat-card-content class="mt-2">
+    <h4>{{ heroe.publisher }}</h4>
+    <p>
+      <strong>Primera aparicion</strong>
+      {{ heroe.firstAppearance }}
+      
+      <br />
+      <mat-chip-listbox>
+        <mat-chip
+          *ngFor="let name of heroe.characters.split(',') | slice : 0 : 3"
+        >
+          {{ name }}
+        </mat-chip>
+      </mat-chip-listbox>
+    </p>
+  </mat-card-content>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-actions>
+    <button
+      [routerLink]="['/heroes/edit/', heroe.id]"
+      mat-button
+      mat-raised
+      color="primary"
+    >
+      <mat-icon>edit</mat-icon>
+      Editar
+    </button>
+
+    <span class="spacer"></span>
+
+    <button
+      [routerLink]="['/heroes', heroe.id]"
+      mat-button
+      mat-raised
+      color="accent"
+    >
+      <mat-icon>more_horiz</mat-icon>
+      Mas
+    </button>
+  </mat-card-actions>
+</mat-card>

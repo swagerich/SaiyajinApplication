@@ -1,0 +1,58 @@
+<div class="flex flex-column p-2">
+    <h3>Buscador</h3>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Buscar</mat-label>
+        <input type="text"
+               placeholder="Buscar heroe..."
+               aria-label="text"
+               matInput
+               [matAutocomplete]="auto"
+               [formControl]="searchInput"
+               (input)="searchHeroe()"
+               >
+        <mat-autocomplete 
+        autoActiveFirstOption 
+        #auto="matAutocomplete"
+        (optionSelected)="onSelectedOption($event)"
+        >
+
+          <mat-option *ngFor="let heroe of heroes" [value]="heroe" >
+            {{heroe.superHero}}
+          </mat-option>
+
+          <mat-option *ngIf="heroes.length === 0 && searchInput.value!.length > 0 " value="">
+            No se encontro nada con el termino {{searchInput.value}}
+          </mat-option>
+
+        </mat-autocomplete>
+      </mat-form-field>
+    
+      {{selectedHeroe | json}}
+
+      <div  *ngIf="selectedHeroe != undefined && searchInput.value!.length > 0">
+      <mat-card class="col-12 sm:col-4">
+        <mat-card-header>
+          <mat-card-title>{{ selectedHeroe.alterEgo }}</mat-card-title>
+          <mat-card-subtitle>{{ selectedHeroe.superHero }}</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+      <mat-divider class="mb-4"></mat-divider>
+      <mat-card class="col-12 sm:col-6">
+        <mat-card-header>
+          <mat-card-title>Informacion</mat-card-title>
+          <mat-card-subtitle>{{ selectedHeroe.superHero }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>{{ selectedHeroe.firstAppearance }}</mat-list-item>
+            <mat-list-item>{{ selectedHeroe.characters }}</mat-list-item>
+            <mat-list-item>{{ selectedHeroe.publisher }}</mat-list-item>
+            <mat-list-item>{{ selectedHeroe.alterEgo }}</mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      <!-- FALTA LA IMAGEN LLLAMAR AL SERVICIO SANATIZER -->
+      </mat-card>
+    </div>
+
+</div>
